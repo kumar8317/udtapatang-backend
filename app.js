@@ -11,9 +11,11 @@ app.use(cookieParser());
 
 import userRoute from './routes/user.js';
 import productRoute from './routes/product.js';
+import orderRoute from './routes/order.js';
 import { errorMiddleware } from './middlewares/error.js';
 app.use("/api/v1/user",userRoute)
 app.use("/api/v1/product",productRoute)
+app.use("/api/v1/order",orderRoute)
 
 
 //Using Error middleware
