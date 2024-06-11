@@ -1,8 +1,22 @@
 import { asyncError } from "../middlewares/error.js";
 import { Order } from "../models/order.js";
 import { Product } from "../models/product.js";
+import { stripe } from "../server.js";
 import ErrorHandler from "../utils/error.js";
 
+export const processPayment = asyncError(async (req, res, next) => {
+    
+    const {totalAmount} = req.body
+    const {client_secret} = await stripe.paymentIntents.create({
+        amount: Number(totalAmount*100),
+        currency: "inr"
+    })
+
+    res.status(200).json({
+        success: true,
+        client_secret
+    })
+})
 export const createOrder = asyncError(async (req, res, next) => {
   const {
     shippingInfo,
@@ -90,7 +104,7 @@ export const processOrder = asyncError(async (req, res, next) => {
     }
     
     await order.save();
-    
+
     res.status(200).json({
       success: true,
       message: `Order processed successfully`,
