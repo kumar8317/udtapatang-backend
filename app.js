@@ -10,8 +10,10 @@ app.use(cookieParser());
 //Importing Routers here
 
 import userRoute from './routes/user.js';
+import productRoute from './routes/product.js';
 import { errorMiddleware } from './middlewares/error.js';
 app.use("/api/v1/user",userRoute)
+app.use("/api/v1/product",productRoute)
 
 
 //Using Error middleware

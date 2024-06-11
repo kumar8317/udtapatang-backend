@@ -6,6 +6,11 @@ export const errorMiddleware = (err, req, res, next) => {
         errorMessage = `Duplicate ${Object.keys(err.keyValue)} entered`
         errorStatus = 400
     }
+
+    if(err.name === 'CastError'){
+        errorMessage = `Invalid ${err.path}`
+        errorStatus = 400
+    }
     return res.status(errorStatus).json({
         success: false,
         message: errorMessage,
