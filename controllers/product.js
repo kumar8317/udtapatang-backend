@@ -203,3 +203,13 @@ export const deleteCategory = asyncError(async (req, res, next) => {
     message: `Category deleted successfully`,
   })
 })
+
+export const getAdminProducts = asyncError(async (req, res, next) => {
+  //Search and category query
+  const products = await Product.find({});
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
