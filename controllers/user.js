@@ -9,7 +9,9 @@ export const login = asyncError(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select("+password");
   //Handle error
-
+  if(!user){
+    return next(new ErrorHandler("User does not exist", 400));
+  }
   if (!password) {
     return next(new ErrorHandler("Please Enter Password", 400));
   }
