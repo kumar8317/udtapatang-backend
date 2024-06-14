@@ -199,7 +199,7 @@ export const deleteCategory = asyncError(async (req, res, next) => {
 
 
   for(let index = 0; index < products.length; index++){
-    const product = products[i];
+    const product = products[index];
     product.category = undefined;
 
     await product.save()
